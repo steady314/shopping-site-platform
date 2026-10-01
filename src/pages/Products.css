@@ -1,0 +1,20 @@
+.product-header {margin-bottom: 40px;}
+.product-header_eyebrow {
+    color: var(--color-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+.products-header h1 {margin-bottom: 12px;}
+.product-header p:last-child {font-size: 16px;}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); gap: 24px;
+}
+@media (max-width: 1000px) {
+    .product-grid {grid-template-columns: repeat(2, 1fr);}
+}
+@media (max-width: 500) {
+    .product-grid {grid-template-columns: 1fr;}
+}
