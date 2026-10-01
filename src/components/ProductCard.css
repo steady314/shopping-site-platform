@@ -38,3 +38,34 @@
     color: var(--color-muted);
     font-size: 14px;
 }
+.product-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.product-card-image-link {
+  display: block;
+  overflow: hidden;
+}
+
+.product-card-image {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card-image {
+  transform: scale(1.03);
+}
+
+.product-card h2 a:hover {
+  text-decoration: underline;
+}

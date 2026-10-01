@@ -3,18 +3,27 @@ import { Link } from "react-router-dom";
 function ProductCard({ product }) {
   return (
     <article className="product-card">
-      <img
-        src={product.image}
-        alt={product.title}
-        className="product-card-image"
-      />
+      <Link
+        to={`/products/${product.id}`}
+        className="product-card-image-link"
+      >
+        <img
+          src={product.image}
+          alt={product.title}
+          className="product-card-image"
+        />
+      </Link>
 
       <div className="product-card-content">
         <p className="product-card-category">
           {product.category}
         </p>
 
-        <h2>{product.title}</h2>
+        <h2>
+          <Link to={`/products/${product.id}`}>
+            {product.title}
+          </Link>
+        </h2>
 
         <p className="product-card-price">
           ₦{product.price.toLocaleString()}

@@ -218,3 +218,40 @@ img {
     grid-template-columns: 1fr;
   }
 }
+/* Product Controls */
+
+.product-controls {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 0.75rem 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.product-controls label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.product-controls input,
+.product-controls select {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: white;
+  color: var(--text);
+  font: inherit;
+}
+
+.product-controls input:focus,
+.product-controls select:focus {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .product-controls {
+    grid-template-columns: 1fr;
+  }
+}

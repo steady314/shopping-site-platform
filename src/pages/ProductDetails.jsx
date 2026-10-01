@@ -1,43 +1,89 @@
-import { useParams } from "react-router-dom";
-import { useContext } from "react";
-import "./ProductDetails.css";
+import { Link, useParams } from "react-router-dom";
+import ProductGrid from "../components/ProductGrid";
 import products from "../data/products";
-import CartContext from "../context/CartContext";
 
 function ProductDetails() {
-    const { id } = useParams();
-    const { addToCart } = useContext(CartContext);
-    const product = products.find(
-        (product) => product.id === Number(id)
+  const { id } = useParams();
+
+  const product = products.find(
+    (item) => item.id === Number(id)
+  );
+
+  if (!product) {
+    return (
+      <main className="product-details-page">
+        <div className="container empty-state">
+          <h1>Product Not Found</h1>
+
+          <p>
+            We couldn't find the product you're looking for.
+          </p>
+
+          <Link to="/products" className="hero-button">
+            Back to Products
+          </Link>
+        </div>
+      </main>
     );
-        function handleAddToCart() {
-    addToCart(product)}
-    if(!product) {
-        return(
-            <main className="page">
-                <section className="page_content">
-                    <h1>Product not found</h1>
-                    <p>Sorry, we couldn't find the product you're looking for.</p>
-                </section>
-            </main>
-        )
-    }
-    return(
-        <main className="product-details">
-            <div className="product-details_container">
-                <div className="product-details_image">
-                    <img src="{product.image}" alt="{product.title}"/>
-                </div>
-                <div className="product-details_content">
-                    <p className="product-details_category"> {product.category} </p>
-                    <h1> {product.title} </h1>
-                    <p className="product-details_rating"> {product.rating} </p>
-                    <p className="product-details_price"> ${product.price}</p>
-                    <p className="product-details_description"> {product.description} </p>
-                    <button className="product-details_button" onClick={handleAddToCart}>Add to Cart</button>
-                </div>
+  }
+
+  const relatedProducts = products.filter(
+    (item) =>
+      item.category === product.category &&
+      item.id !== product.id
+  );
+
+  return (
+    <main className="product-details-page">
+      <div className="container">
+        <Link to="/products" className="back-link">
+          ← Back to Products
+        </Link>
+
+        <section className="product-details">
+          <div className="product-details-image-wrapper">
+            <img
+              src={product.image}
+              alt={product.title}
+              className="product-details-image"
+            />
+          </div>
+
+          <div className="product-details-content">
+            <p className="eyebrow">
+              {product.category}
+            </p>
+
+            <h1>{product.title}</h1>
+
+            <p className="product-details-price">
+              ₦{product.price.toLocaleString()}
+            </p>
+
+            <p className="product-details-description">
+              {product.description}
+            </p>
+
+            <button className="product-action-button">
+              Add to Cart
+            </button>
+          </div>
+        </section>
+
+        {relatedProducts.length > 0 && (
+          <section className="related-products">
+            <div className="section-heading">
+              <p className="eyebrow">You may also like</p>
+
+              <h2>Related Products</h2>
             </div>
-        </main>
-    );
+
+            <ProductGrid products={relatedProducts} />
+          </section>
+        )}
+      </div>
+    </main>
+  );
 }
+
 export default ProductDetails;
