@@ -24,6 +24,10 @@ export function CartProvider({ children }) {
     );
   }, [cartItems]);
 
+  function clearCart() {
+  setCartItems([]);
+}
+
   function addToCart(product) {
     setCartItems((currentItems) => {
       const existingItem = currentItems.find(
@@ -104,6 +108,7 @@ export function CartProvider({ children }) {
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
+        clearCart,
         totalItems,
         totalPrice
       }}

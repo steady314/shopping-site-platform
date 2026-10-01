@@ -249,7 +249,159 @@ img {
   outline: 2px solid var(--text);
   outline-offset: 2px;
 }
+/* Checkout */
 
+.checkout-page {
+  padding-block: 4rem;
+}
+
+.checkout-header {
+  margin-bottom: 3rem;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.checkout-form,
+.checkout-summary {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+}
+
+.checkout-form h2,
+.checkout-summary h2 {
+  margin-bottom: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-field input {
+  min-height: 46px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font: inherit;
+}
+
+.form-field input:focus {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.form-error {
+  color: #b91c1c;
+  font-size: 0.85rem;
+}
+
+.checkout-button {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 0.9rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary);
+  color: white;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.checkout-item p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.checkout-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+}
+
+/* Order success */
+
+.order-success {
+  padding-block: 6rem;
+}
+
+.success-card {
+  max-width: 650px;
+  margin-inline: auto;
+  padding: 4rem 2rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.success-icon {
+  display: grid;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  font-size: 1.5rem;
+}
+
+.success-card h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+}
+
+.success-card > p:not(.eyebrow) {
+  max-width: 500px;
+  margin: 1rem auto 0;
+  color: var(--muted);
+}
+
+@media (max-width: 800px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field-full {
+    grid-column: auto;
+  }
+}
 @media (max-width: 600px) {
   .product-controls {
     grid-template-columns: 1fr;
