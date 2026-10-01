@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
 function Navbar() {
+  const { totalItems } = useCart();
   return (
     <header className="navbar">
       <div className="container navbar-inner">
@@ -16,7 +18,7 @@ function Navbar() {
           </NavLink>
 
           <NavLink to="/cart">
-            Cart
+            Cart ({totalItems})
           </NavLink>
         </nav>
       </div>
