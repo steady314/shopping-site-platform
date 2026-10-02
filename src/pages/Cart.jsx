@@ -53,8 +53,7 @@ function Cart() {
                     <h2>{product.title}</h2>
 
                     <p>
-                      ₦
-                      {product.price.toLocaleString()}
+                      ${product.price.toFixed(2)}
                     </p>
 
                     <div className="quantity-controls">
@@ -96,9 +95,7 @@ function Cart() {
             <h2>Order Summary</h2>
 
             <p>
-              Total:
-              ₦
-              {totalPrice.toLocaleString()}
+              Total: ${totalPrice.toFixed(2)}
             </p>
 
             <Link

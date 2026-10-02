@@ -260,10 +260,7 @@ function Checkout() {
                 </div>
 
                 <span>
-                  ₦
-                  {(
-                    item.price * item.quantity
-                  ).toLocaleString()}
+                  ${(item.price * item.quantity).toFixed(2)}
                 </span>
               </div>
             ))}
@@ -272,7 +269,7 @@ function Checkout() {
               <strong>Total</strong>
 
               <strong>
-                ₦{totalPrice.toLocaleString()}
+                ${totalPrice.toFixed(2)}
               </strong>
             </div>
           </aside>
