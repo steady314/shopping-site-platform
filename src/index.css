@@ -13,7 +13,16 @@
   --primary: #111827;
   --max-width: 1200px;
 }
-
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--text);
@@ -38,9 +47,18 @@ img {
 
 /* Navbar */
 
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .navbar {
   border-bottom: 1px solid var(--border);
   background: white;
+  width: 100%;
+  padding: 16px 24px;
 }
 
 .navbar-inner {
@@ -70,6 +88,16 @@ img {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 14px 16px;
+  }
+
+  .navbar-container {
+    gap: 12px;
+  }
 }
 
 /* Hero */
@@ -142,7 +170,22 @@ img {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
+  gap: 24px;
+}
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Product Card */
@@ -412,6 +455,14 @@ img {
 .error-state .hero-button {
   border: none;
   cursor: pointer;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
 }
 
 @media (max-width: 800px) {

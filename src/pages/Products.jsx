@@ -3,6 +3,22 @@ import ProductGrid from "../components/ProductGrid";
 import { getProducts } from "../services/productService";
 
 function Products() {
+  async function loadProducts() {
+  try {
+    setLoading(true);
+    setError("");
+
+    const data = await getProducts();
+
+    setProducts(data);
+  } catch (error) {
+    setError("Unable to load products.");
+  } finally {
+    setLoading(false);
+  }
+}
+  useEffect(() => { loadProducts();
+}, []);
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] =
@@ -77,11 +93,8 @@ function Products() {
 
             <p>{error}</p>
 
-            <button
-              onClick={() => window.location.reload()}
-              className="hero-button"
-            >
-              Try Again
+            <button onClick={loadProducts}>
+                Try Again
             </button>
           </div>
         </div>

@@ -34,56 +34,62 @@ function Cart() {
 
         <div className="cart-layout">
           <div className="cart-items">
-            {cartItems.map((item) => (
-              <article
-                key={item.id}
-                className="cart-item"
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                />
+            {cartItems.map((product) => {
+              if (!product || !product.id) {
+                return null;
+              }
 
-                <div>
-                  <h2>{item.title}</h2>
+              return (
+                <article
+                  key={product.id}
+                  className="cart-item"
+                >
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                  />
 
-                  <p>
-                    ₦
-                    {item.price.toLocaleString()}
-                  </p>
+                  <div>
+                    <h2>{product.title}</h2>
 
-                  <div className="quantity-controls">
+                    <p>
+                      ₦
+                      {product.price.toLocaleString()}
+                    </p>
+
+                    <div className="quantity-controls">
+                      <button
+                        onClick={() =>
+                          decreaseQuantity(product.id)
+                        }
+                      >
+                        -
+                      </button>
+
+                      <span>
+                        {product.quantity}
+                      </span>
+
+                      <button
+                        onClick={() =>
+                          increaseQuantity(product.id)
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+
                     <button
                       onClick={() =>
-                        decreaseQuantity(item.id)
+                        removeFromCart(product.id)
                       }
                     >
-                      -
-                    </button>
-
-                    <span>
-                      {item.quantity}
-                    </span>
-
-                    <button
-                      onClick={() =>
-                        increaseQuantity(item.id)
-                      }
-                    >
-                      +
+                      Remove
                     </button>
                   </div>
-
-                  <button
-                    onClick={() =>
-                      removeFromCart(item.id)
-                    }
-                  >
-                    Remove
-                  </button>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
 
           <aside className="cart-summary">

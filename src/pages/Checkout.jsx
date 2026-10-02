@@ -11,6 +11,27 @@ function Checkout() {
 
   const navigate = useNavigate();
 
+  if (cartItems.length === 0) {
+    return (
+      <main className="checkout-page">
+        <div className="container empty-state">
+          <h1>Your Cart Is Empty</h1>
+
+          <p>
+            Add some products before checking out.
+          </p>
+
+          <Link
+            to="/products"
+            className="hero-button"
+          >
+            Continue Shopping
+          </Link>
+        </div>
+      </main>
+    );
+  }
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -76,27 +97,6 @@ function Checkout() {
     clearCart();
 
     navigate("/order-success");
-  }
-
-  if (cartItems.length === 0) {
-    return (
-      <main className="checkout-page">
-        <div className="container empty-state">
-          <h1>Your Cart Is Empty</h1>
-
-          <p>
-            Add some products before checking out.
-          </p>
-
-          <Link
-            to="/products"
-            className="hero-button"
-          >
-            Continue Shopping
-          </Link>
-        </div>
-      </main>
-    );
   }
 
   return (
