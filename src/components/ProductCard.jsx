@@ -26,7 +26,7 @@ function ProductCard({ product }) {
         </h2>
 
         <p className="product-card-price">
-          ₦{product.price.toLocaleString()}
+          ${product.price.toFixed(2)}
         </p>
 
         <Link

@@ -388,6 +388,31 @@ img {
   margin: 1rem auto 0;
   color: var(--muted);
 }
+.loading-state,
+.error-state {
+  min-height: 300px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.error-state {
+  padding: 3rem 1rem;
+}
+
+.error-state h1 {
+  margin-bottom: 0.5rem;
+}
+
+.error-state p {
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+}
+
+.error-state .hero-button {
+  border: none;
+  cursor: pointer;
+}
 
 @media (max-width: 800px) {
   .checkout-layout {

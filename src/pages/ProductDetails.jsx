@@ -1,6 +1,11 @@
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  Link,
+  useParams
+} from "react-router-dom";
+
 import ProductGrid from "../components/ProductGrid";
-import products from "../data/products";
+import { getProductById } from "../services/productService";
 import { useCart } from "../context/CartContext";
 
 function ProductDetails() {
@@ -8,21 +13,63 @@ function ProductDetails() {
 
   const { addToCart } = useCart();
 
-  const product = products.find(
-    (item) => item.id === Number(id)
-  );
+  const [product, setProduct] =
+    useState(null);
 
-  if (!product) {
+  const [loading, setLoading] =
+    useState(true);
+
+  const [error, setError] =
+    useState("");
+
+  useEffect(() => {
+    async function loadProduct() {
+      try {
+        setLoading(true);
+        setError("");
+
+        const data =
+          await getProductById(id);
+
+        setProduct(data);
+      } catch (error) {
+        setError(
+          error.message ||
+            "Failed to load product."
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <main className="product-details-page">
+        <div className="container loading-state">
+          <p>Loading product...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (error || !product) {
     return (
       <main className="product-details-page">
         <div className="container empty-state">
           <h1>Product Not Found</h1>
 
           <p>
-            We couldn't find the product you're looking for.
+            We couldn't find the product you're
+            looking for.
           </p>
 
-          <Link to="/products" className="hero-button">
+          <Link
+            to="/products"
+            className="hero-button"
+          >
             Back to Products
           </Link>
         </div>
@@ -30,16 +77,13 @@ function ProductDetails() {
     );
   }
 
-  const relatedProducts = products.filter(
-    (item) =>
-      item.category === product.category &&
-      item.id !== product.id
-  );
-
   return (
     <main className="product-details-page">
       <div className="container">
-        <Link to="/products" className="back-link">
+        <Link
+          to="/products"
+          className="back-link"
+        >
           ← Back to Products
         </Link>
 
@@ -60,30 +104,23 @@ function ProductDetails() {
             <h1>{product.title}</h1>
 
             <p className="product-details-price">
-              ₦{product.price.toLocaleString()}
+              ${product.price.toFixed(2)}
             </p>
 
             <p className="product-details-description">
               {product.description}
             </p>
 
-            <button className="product-action-button" onClick={() => addToCart(product)}>
-                Add to Cart
+            <button
+              className="product-action-button"
+              onClick={() =>
+                addToCart(product)
+              }
+            >
+              Add to Cart
             </button>
           </div>
         </section>
-
-        {relatedProducts.length > 0 && (
-          <section className="related-products">
-            <div className="section-heading">
-              <p className="eyebrow">You may also like</p>
-
-              <h2>Related Products</h2>
-            </div>
-
-            <ProductGrid products={relatedProducts} />
-          </section>
-        )}
       </div>
     </main>
   );
