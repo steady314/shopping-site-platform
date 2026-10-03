@@ -1,21 +1,25 @@
-const API_URL = import.meta.env.VITE_API_URL;
+export default async function handler(req, res) {
+  const { id } = req.query;
 
-export async function getProducts() {
-  const response = await fetch(API_URL);
+  const endpoint = id
+    ? `https://fakestoreapi.com/products/${id}`
+    : "https://fakestoreapi.com/products";
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch products.");
+  try {
+    const response = await fetch(endpoint);
+
+    if (!response.ok) {
+      return res.status(response.status).json({
+        message: "Failed to fetch products from Fake Store API.",
+      });
+    }
+
+    const data = await response.json();
+
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Server error while fetching products.",
+    });
   }
-
-  return response.json();
-}
-
-export async function getProductById(id) {
-  const response = await fetch(`${API_URL}/${id}`);
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch product.");
-  }
-
-  return response.json();
 }
